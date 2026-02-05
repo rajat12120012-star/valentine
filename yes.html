@@ -24,43 +24,30 @@ body {
   to { opacity: 1; }
 }
 
-img {
-  width: 240px;
+button {
   margin-top: 20px;
-  border-radius: 20px;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #ff4d6d;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="https://archive.org/download/akhan-nu/Akhan%20Nu.mp3" type="audio/mpeg">
-</audio>
-
 <div>
   <h1>💖 Yayyy Shivam! I knew it 😍💖</h1>
-  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+  <p>You just made this Valentine extra special ✨</p>
+  <button onclick="next()">Next 💕</button>
 </div>
 
 <script>
-const music = document.getElementById("bgMusic");
-music.volume = 0;
-
-// Fade in
-function fadeInMusic() {
-  let fade = setInterval(() => {
-    if (music.volume < 0.7) {
-      music.volume += 0.05;
-    } else {
-      clearInterval(fade);
-      music.volume = 0.7;
-    }
-  }, 50);
-}
-
-if (localStorage.getItem("musicPlaying") === "yes") {
-  music.play().then(fadeInMusic).catch(() => {});
+function next() {
+  window.location.href = "story.html";
 }
 </script>
 
