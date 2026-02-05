@@ -17,13 +17,8 @@ body {
   overflow: hidden;
 }
 
-.fade-out {
-  animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; }
-}
+.fade-out { animation: fadeOut 1s forwards; }
+@keyframes fadeOut { to { opacity: 0; } }
 
 .card {
   background: white;
@@ -36,10 +31,7 @@ body {
   position: relative;
 }
 
-h1 {
-  color: #ff4d6d;
-  margin-bottom: 15px;
-}
+h1 { color: #ff4d6d; margin-bottom: 15px; }
 
 .lyrics {
   font-size: 14px;
@@ -56,11 +48,7 @@ button {
   cursor: pointer;
 }
 
-.yes {
-  background: #ff4d6d;
-  color: white;
-}
-
+.yes { background: #ff4d6d; color: white; }
 .no {
   background: #ddd;
   position: absolute;
@@ -86,7 +74,7 @@ button {
   <source src="https://archive.org/download/akhan-nu/Akhan%20Nu.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-btn" onclick="toggleMusic()">🎵</div>
+<div class="music-btn">🎵</div>
 
 <div class="card" id="card">
   <h1>💘 Shivam, will you be my Valentine? 💘</h1>
@@ -104,13 +92,16 @@ button {
 const music = document.getElementById("bgMusic");
 music.volume = 0.7;
 
-// Restore music state
-if (localStorage.getItem("musicPlaying") === "yes") {
-  music.play();
-}
+// 🔑 START MUSIC ON FIRST USER CLICK (IMPORTANT)
+document.addEventListener("click", () => {
+  if (music.paused) {
+    music.play().catch(() => {});
+    localStorage.setItem("musicPlaying", "yes");
+  }
+}, { once: true });
 
-// Toggle music
-function toggleMusic() {
+// 🎵 Button toggle
+document.querySelector(".music-btn").onclick = () => {
   if (music.paused) {
     music.play();
     localStorage.setItem("musicPlaying", "yes");
@@ -118,6 +109,11 @@ function toggleMusic() {
     music.pause();
     localStorage.setItem("musicPlaying", "no");
   }
+};
+
+// Restore state
+if (localStorage.getItem("musicPlaying") === "yes") {
+  music.play().catch(() => {});
 }
 
 // No button movement
@@ -127,7 +123,7 @@ setInterval(() => {
   noBtn.style.top = Math.random() * 150 + "px";
 }, 600);
 
-// Fade music volume smoothly
+// Fade out music
 function fadeOutMusic(callback) {
   let fade = setInterval(() => {
     if (music.volume > 0.05) {
@@ -140,7 +136,7 @@ function fadeOutMusic(callback) {
   }, 50);
 }
 
-// Redirect with animation + music fade
+// Redirect
 function goNext() {
   document.getElementById("card").classList.add("fade-out");
 
@@ -149,13 +145,10 @@ function goNext() {
       window.location.href = "yes.html";
     });
   } else {
-    setTimeout(() => {
-      window.location.href = "yes.html";
-    }, 1000);
+    setTimeout(() => window.location.href = "yes.html", 1000);
   }
 }
 </script>
 
 </body>
 </html>
-
