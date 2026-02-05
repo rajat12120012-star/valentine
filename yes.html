@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yay 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.container {
+  padding: 20px;
+}
+
+.lyrics {
+  margin-top: 15px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+img {
+  width: 240px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="https://archive.org/download/akhan-nu/Akhan%20Nu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <h1>💖 Yayyy Shivam! I knew it 😍💖</h1>
+
+  <div class="lyrics">
+    “Tainu vekh ke lagda ae,  
+    ishq da rang chadh jaanda ae ❤️”
+  </div>
+
+  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+</div>
+
+<script>
+const music = document.getElementById("bgMusic");
+music.volume = 0;
+
+// Fade IN music
+function fadeInMusic() {
+  let fade = setInterval(() => {
+    if (music.volume < 0.7) {
+      music.volume += 0.05;
+    } else {
+      clearInterval(fade);
+      music.volume = 0.7;
+    }
+  }, 50);
+}
+
+if (localStorage.getItem("musicPlaying") === "yes") {
+  music.play();
+  fadeInMusic();
+}
+</script>
+
+</body>
+</html>
