@@ -24,16 +24,6 @@ body {
   to { opacity: 1; }
 }
 
-.container {
-  padding: 20px;
-}
-
-.lyrics {
-  margin-top: 15px;
-  font-size: 16px;
-  font-style: italic;
-}
-
 img {
   width: 240px;
   margin-top: 20px;
@@ -48,14 +38,8 @@ img {
   <source src="https://archive.org/download/akhan-nu/Akhan%20Nu.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
+<div>
   <h1>💖 Yayyy Shivam! I knew it 😍💖</h1>
-
-  <div class="lyrics">
-    “Tainu vekh ke lagda ae,  
-    ishq da rang chadh jaanda ae ❤️”
-  </div>
-
   <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 </div>
 
@@ -63,7 +47,7 @@ img {
 const music = document.getElementById("bgMusic");
 music.volume = 0;
 
-// Fade IN music
+// Fade in
 function fadeInMusic() {
   let fade = setInterval(() => {
     if (music.volume < 0.7) {
@@ -76,8 +60,7 @@ function fadeInMusic() {
 }
 
 if (localStorage.getItem("musicPlaying") === "yes") {
-  music.play();
-  fadeInMusic();
+  music.play().then(fadeInMusic).catch(() => {});
 }
 </script>
 
